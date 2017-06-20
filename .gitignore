@@ -1,0 +1,15 @@
+*.settings/
+*target/
+*.svn/
+*.project
+*.classpath
+.DS_Store
+.idea/
+.gradle/
+*.iml
+*.class
+*/build/*
+/build/*
+
+
+

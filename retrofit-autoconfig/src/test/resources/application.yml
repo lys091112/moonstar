@@ -1,0 +1,11 @@
+retrofit:
+  # http configuraton for retrofit http module
+  connectionTimeout: 3000 # http time setting , millseconds
+
+  endpoints:
+    - idetify: default
+      baseUrl: http://127.0.0.1:${random.int(10000,15000)}
+    - idetify: test1
+      baseUrl: http://127.0.0.1:${random.int(10000,15000)}
+    - idetify: test2
+      baseUrl: http://127.0.0.1:${random.int(10000,15000)}

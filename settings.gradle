@@ -1,0 +1,4 @@
+rootProject.name = 'moonstar'
+include 'practice'
+include 'retrofit-autoconfig'
+

@@ -1,0 +1,54 @@
+group 'com.xianyue'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenCentral()
+}
+
+//指定springboot启动的main入口类
+springBoot {
+    mainClass = "com.xianyue.springboot.Application"
+}
+
+buildscript {
+    repositories {
+        mavenLocal() //1.优先查找本地maven库，性能最好
+        maven {//2.其次查找aliyun maven库
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenCentral()
+        jcenter()
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+        }
+    }
+}
+
+dependencies {
+    testCompile(
+            libraries.'junit',
+            libraries.'spring-boot-test'
+    )
+    compile(
+            libraries.'spring-boot-web',
+            libraries.'spring-boot-jdbc',
+            libraries.'spring-boot-mail',
+            libraries.'lombok',
+            libraries.'redis',
+            libraries.'swagger',
+            libraries.'swagger-ui',
+            libraries.'ali-json',
+            libraries.'mysql-connector',
+            libraries.'ali-druid',
+            libraries.'mybatis',
+            libraries.'cglib',
+            libraries.'mybatis-spring',
+            libraries.'commons-io',
+            libraries.'guava'
+    )
+//    compile(libraries.'swagger') { exclude group:'com.google.guava', module:'guava' }
+}
+
