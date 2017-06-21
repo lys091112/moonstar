@@ -104,4 +104,9 @@ public class UserController {
         return userService.getUsersByPage(pageIndex);
     }
 
+    @GetMapping("/exception")
+    public String excpetionTest() throws Exception{
+      throw  new Exception("oh , my lady");
+    }
+
 }
