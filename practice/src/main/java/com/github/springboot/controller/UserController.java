@@ -1,18 +1,26 @@
 package com.github.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.github.springboot.service.UserService;
 import com.github.springboot.config.UserDemo;
 import com.github.springboot.domain.User;
-import com.github.springboot.util.RedisTemplate;
-import io.swagger.annotations.*;
+import com.github.springboot.service.UserService;
+import com.xianyue.retrofit.tmp.UserInfoProvider;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Xianyue
@@ -48,7 +56,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    RedisTemplate redisTemplate;
+    private UserInfoProvider provider;
 
     private final static String prefix = "PREFIX";
 
@@ -61,20 +69,27 @@ public class UserController {
             @ApiResponse(code = 200, message = "success"),
             @ApiResponse(code = 400, message = "service error")
     })
+
+    /**
+     * 通过Cacheable注解，进行redis缓存
+     */
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+//    @Cacheable(value = "foo")
     public UserDemo getUserInfo(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "password", required = false) String password) {
+        userDemo.setId(provider.getUserId());
         return userDemo;
     }
 
-    //    @RequestMapping("/getJedisValue")
-    public String getJedisValue(HttpServletRequest request, @RequestParam(value = "userName", required = true) String userName) {
-        Optional<String> optional = redisTemplate.get(prefix, "userName");
-        if (!optional.isPresent()) {
-            redisTemplate.set(prefix, "userName", userName);
-            return null;
-        }
+    @RequestMapping(value = "/changeUserInfo", method = RequestMethod.GET)
+    public UserDemo changeUserInfo() {
+        userDemo.setId(provider.changeUserDemo());
+        return userDemo;
+    }
 
-        return optional.get();
+    @RequestMapping(value = "/getUserInfo/noCache", method = RequestMethod.GET)
+    public UserDemo getUserInfoNoCache(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "password",
+            required = false) String password) {
+        return userDemo;
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
@@ -94,7 +109,6 @@ public class UserController {
     @ApiOperation(value = "事务测试", httpMethod = "POST")
     @RequestMapping(value = "/testTransaction", method = RequestMethod.POST)
     public int testTransaction(HttpServletRequest request, @RequestBody String str) throws IOException {
-//        User user = RequestHelper.getJsonFromReqeust(request,User.class);
         User user = JSON.parseObject(str, User.class);
         return userService.testTransaction(user);
     }
@@ -108,5 +122,4 @@ public class UserController {
     public String excpetionTest() throws Exception{
       throw  new Exception("oh , my lady");
     }
-
 }

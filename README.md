@@ -15,6 +15,7 @@
 
 # 模块规划
 
+- practice             #spring 学习demo练习
 - retrofit-autoconfig  #通过注解自动启动retrofit
 - starlight-service    #数据库操作基础service，自提供数据库连接功能，不用外部引用添加数据库工具依赖， 备选： ali-duird， Hikari
 - dv                   #数据处理展示层

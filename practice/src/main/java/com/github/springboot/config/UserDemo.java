@@ -2,8 +2,11 @@ package com.github.springboot.config;
 
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 
 /**
  * @ConfigurationProperties(prefix="user") 自动读取application.properties（是spring-boot默认查找的文件）文件中的user.*的属性
@@ -12,7 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "user")
 @Data
-public class UserDemo {
+@Accessors(chain = true)
+public class UserDemo implements Serializable {
     //    @Value(value = "${user.id}")
     private int    id;
     private String userName;

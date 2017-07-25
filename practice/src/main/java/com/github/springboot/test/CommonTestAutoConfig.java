@@ -1,12 +1,14 @@
 package com.github.springboot.test;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 //@Configurable what's this
 
 @Configuration
+@ConditionalOnProperty(value = "practice.test.open", havingValue = "true" )
 public class CommonTestAutoConfig {
 
   @Bean

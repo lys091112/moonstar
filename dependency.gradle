@@ -36,8 +36,6 @@ ext.versions = [
         httpclient         : '4.3.1'
 ]
 
-//compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
-
 ext.libraries = [
         "servlet-api"            : "javax.servlet:javax.servlet-api:3.0.1",
 
@@ -46,6 +44,8 @@ ext.libraries = [
         "spring-boot-jdbc"       : "org.springframework.boot:spring-boot-starter-jdbc:${versions.springboot}",
         "spring-boot-mail"       : "org.springframework.boot:spring-boot-starter-mail:${versions.springboot}",
         "spring-boot-test"       : "org.springframework.boot:spring-boot-starter-test:${versions.springboot}",
+        // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-redis
+        "spring-boot-redis"      : "org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE",
 
         // spring 4.x
         "spring-core"            : "org.springframework:spring-core:${versions.spring}",

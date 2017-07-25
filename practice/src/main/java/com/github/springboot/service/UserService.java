@@ -31,9 +31,6 @@ public class UserService {
      */
     @PostConstruct
     public void init() {
-//        System.out.println("user.id----------------- = "+userId);
-//        userId = 9L;
-//        System.out.println("user.id2---------------- = "+ userId);
     }
 
     public User addUser(String userName, String password) {
