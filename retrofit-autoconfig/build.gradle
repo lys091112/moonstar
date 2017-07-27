@@ -31,17 +31,14 @@ buildscript {
 }
 
 dependencies {
-    testCompile "junit:junit:4.12"
-    testCompile (
+    testCompile(
             libraries.'spring-boot-test'
     )
 
     compile(
             libraries.'spring-boot-web',
             libraries.'lombok',
-            libraries.'swagger-ui',
             libraries.'mysql-connector',
             libraries.'guava',
-            libraries.'jackson-databind'
     )
 }

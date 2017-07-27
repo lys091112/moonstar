@@ -1,7 +1,9 @@
 package com.github.springboot;
 
+import com.github.springboot.test.MyServiceBeanRegister;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author Xianyue
@@ -10,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @ComponentScan：该注解指定扫描包（如果主类不是位于根路径下，这里需要指定扫描路径）,类似于spring的包扫描注解,扫描路径由@EnableAutoConfiguration指定了
  */
 @SpringBootApplication  //same as @Configuration+@EnableAutoConfiguration+@ComponentScan
+@Import(MyServiceBeanRegister.class)
 public class Application {
 
   public static void main(String[] args) {

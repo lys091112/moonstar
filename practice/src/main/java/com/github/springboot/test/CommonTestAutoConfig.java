@@ -3,13 +3,22 @@ package com.github.springboot.test;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 //@Configurable what's this
 
 @Configuration
+<<<<<<< Updated upstream
 @ConditionalOnProperty(value = "practice.test.open", havingValue = "true" )
+=======
+@Import(MyServiceBeanRegister.class)
+@ComponentScan("com.github")
+>>>>>>> Stashed changes
 public class CommonTestAutoConfig {
+
+  private static final String test = "autoconfig";
 
   @Bean
   public AwareBean awareBean() {
@@ -31,9 +40,13 @@ public class CommonTestAutoConfig {
 //  public MyBeanPostProcessorDouble myBeanPostProcessorDouble() {
 //    return new MyBeanPostProcessorDouble();
 //  }
-  @Bean
-  public MyBeanPostProcessor myBeanPostProcessor() {
-    return new MyBeanPostProcessor();
-  }
+//  @Bean
+//  public MyBeanPostProcessor myBeanPostProcessor() {
+//    return new MyBeanPostProcessor();
+//  }
 
+//  @Bean
+//  public MyServiceBeanRegister myServiceBeanRegister() {
+//    return new MyServiceBeanRegister();
+//  }
 }
