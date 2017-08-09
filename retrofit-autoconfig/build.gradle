@@ -40,5 +40,7 @@ dependencies {
             libraries.'lombok',
             libraries.'mysql-connector',
             libraries.'guava',
+            libraries.'retrofit2',
+            libraries.'retrofit2-convert-jackson'
     )
 }

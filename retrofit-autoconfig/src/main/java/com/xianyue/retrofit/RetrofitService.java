@@ -11,5 +11,5 @@ public @interface RetrofitService{
 
   String name() default "";
 
-  String value() default "";
+  String value() default "default";
 }

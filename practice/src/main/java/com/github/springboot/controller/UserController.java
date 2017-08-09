@@ -4,23 +4,22 @@ import com.alibaba.fastjson.JSON;
 import com.github.springboot.config.UserDemo;
 import com.github.springboot.domain.User;
 import com.github.springboot.service.UserService;
-import com.xianyue.retrofit.tmp.UserInfoProvider;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Xianyue
@@ -55,9 +54,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserInfoProvider provider;
-
     private final static String prefix = "PREFIX";
 
     @ApiOperation("获取用户信息")
@@ -74,15 +70,13 @@ public class UserController {
      * 通过Cacheable注解，进行redis缓存
      */
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
-//    @Cacheable(value = "foo")
+    @Cacheable(value = "foo")
     public UserDemo getUserInfo(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "password", required = false) String password) {
-        userDemo.setId(provider.getUserId());
         return userDemo;
     }
 
     @RequestMapping(value = "/changeUserInfo", method = RequestMethod.GET)
     public UserDemo changeUserInfo() {
-        userDemo.setId(provider.changeUserDemo());
         return userDemo;
     }
 

@@ -7,9 +7,9 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 /**
  * 针对于固定的注解类型进行扫描，并搜集该注解的类信息
  */
-public class RetrofitServiceProvider extends ClassPathScanningCandidateComponentProvider {
+public class RetrofitServiceComponentProvider extends ClassPathScanningCandidateComponentProvider {
 
-  private RetrofitServiceProvider() {
+  private RetrofitServiceComponentProvider() {
     super(false);
     addIncludeFilter(new AnnotationTypeFilter(RetrofitService.class));
   }
@@ -19,9 +19,9 @@ public class RetrofitServiceProvider extends ClassPathScanningCandidateComponent
     return beanDefinition.getMetadata().isInterface();
   }
 
-  private static RetrofitServiceProvider provider = new RetrofitServiceProvider();
+  private static RetrofitServiceComponentProvider provider = new RetrofitServiceComponentProvider();
 
-  public static RetrofitServiceProvider getInstance() {
+  public static RetrofitServiceComponentProvider getInstance() {
     return provider;
   }
 

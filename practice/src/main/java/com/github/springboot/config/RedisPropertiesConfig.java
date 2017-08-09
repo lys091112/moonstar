@@ -1,6 +1,9 @@
 package com.github.springboot.config;
 
-import com.xianyue.retrofit.autoconfig.RetrofitAutoConfiguration;
+import static java.time.Duration.ofMinutes;
+
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -15,17 +18,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static java.time.Duration.ofMinutes;
-
 /**
  * {@code EnableCacheing} 开启注解形式的redis缓存使用
  * AbstractCacheResolver.resolveCaches 一旦注册一个cacheName,那么必须把所有的cachename都进行注册，不然会产生异常
  */
 @EnableCaching
-@AutoConfigureAfter({CacheAutoConfiguration.class, RetrofitAutoConfiguration.class})
+//@AutoConfigureAfter({CacheAutoConfiguration.class, RetrofitAutoConfiguration.class})
+@AutoConfigureAfter({CacheAutoConfiguration.class})
 @Configuration
 @EnableConfigurationProperties(CacheProperties.class)
 public class RedisPropertiesConfig {

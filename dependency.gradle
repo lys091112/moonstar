@@ -19,7 +19,7 @@ ext.versions = [
         guava              : '21.0',
         swagger            : '2.6.1',
         lombok             : '1.16.4',
-        retrofit2          : "2.1.0",
+        retrofit2          : "2.3.0",
 ]
 
 ext.libraries = [
@@ -68,5 +68,5 @@ ext.libraries = [
 
         //retrofit+okhttp
         "retrofit2"              : "com.squareup.retrofit2:retrofit:${versions.retrofit2}",
-        "retrofit2-convert-json" : "com.squareup.retrofit2:converter-jackson:${versions.retrofit2}",
+        "retrofit2-convert-jackson" : "com.squareup.retrofit2:converter-jackson:${versions.retrofit2}",
 ]

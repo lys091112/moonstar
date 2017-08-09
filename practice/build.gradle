@@ -49,7 +49,7 @@ dependencies {
             libraries.'guava',
             libraries.'slf4j-api'
     )
-    compile project(":retrofit-autoconfig")
+//    compile project(":retrofit-autoconfig")
 //    compile(libraries.'swagger') { exclude group:'com.google.guava', module:'guava' }
 }
 
