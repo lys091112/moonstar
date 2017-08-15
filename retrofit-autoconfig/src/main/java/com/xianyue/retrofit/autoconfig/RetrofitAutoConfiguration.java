@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,10 +26,13 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 /**
  * retrofit 自动加载类
  */
+@Slf4j
 @Configuration
 @ConditionalOnClass({OkHttpClient.class, Retrofit.class})
 @EnableConfigurationProperties(RetrofitProperties.class)
 public class RetrofitAutoConfiguration {
+
+  protected final static long DEFAUL_TTIMEOUT = 5000;
 
   private final RetrofitProperties retrofitProperties;
 
@@ -39,16 +44,31 @@ public class RetrofitAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean(ConnectionPool.class)
   public ConnectionPool connectionPool() {
-    return new ConnectionPool(10, 5, TimeUnit.MINUTES);
+    return new ConnectionPool(retrofitProperties.getMaxIdleConnection(), retrofitProperties.getKeepAliveDuration(),
+        TimeUnit.MINUTES);
   }
 
   // TODO{crescent} 添加日志拦截器， 执行时间监控拦截器
   @Bean
   public OkHttpClient okHttpClient(ConnectionPool connectionPool) {
-    OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(
-        5, TimeUnit.SECONDS).readTimeout(5, TimeUnit.SECONDS)
-        .writeTimeout(5, TimeUnit.SECONDS).connectionPool(connectionPool).build();
-    return new OkHttpClient();
+    Long connectionTimout = checkAndGetValue(retrofitProperties.getConnectionTimeout(), "connectonTimeout");
+    Long readTimeout = checkAndGetValue(retrofitProperties.getReadTimeout(), "readTimeout");
+    Long writeTimeout = checkAndGetValue(retrofitProperties.getWirteTimeout(), "writeTimeout");
+
+    return new OkHttpClient.Builder().connectTimeout(
+        connectionTimout, TimeUnit.MILLISECONDS)
+        .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
+        .writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
+        .connectionPool(connectionPool).build();
+  }
+
+  private Long checkAndGetValue(Long connectionTimeout, String paramName) {
+    if (null == connectionTimeout) {
+      log.warn("{} is null in the properties! so use default value {} milliseconds", paramName,
+          DEFAUL_TTIMEOUT);
+      return DEFAUL_TTIMEOUT;
+    }
+    return connectionTimeout;
   }
 
   @Bean
@@ -68,9 +88,7 @@ public class RetrofitAutoConfiguration {
   }
 
   @Configuration
-//  @ConditionalOnProperty(value = "jackson.converter", havingValue = "true")
   public static class JsonConverterClass {
-
     @Bean
     @ConditionalOnMissingBean(ObjectMapper.class)
     public ObjectMapper objectMapper() {
