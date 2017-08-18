@@ -1,34 +1,37 @@
 ext.versions = [
-        springboot         : '1.5.2.RELEASE',
+        springboot     : '1.5.2.RELEASE',
 
         //database
-        mysql_connector    : '6.0.5',
-        ali_druid          : '1.0.28',
-        mybatis            : '3.4.2',
-        mybatis_spring     : '1.3.1',
+        mysql_connector: '6.0.5',
+        ali_druid      : '1.0.28',
+        mybatis        : '3.4.2',
+        mybatis_spring : '1.3.1',
 
         //log
-        logback            : '1.1.7',
-        slf4j              : '1.7.24',
+        logback        : '1.1.7',
+        slf4j          : '1.7.24',
 
         //json
-        jackson            : '2.9.0.pr3',
-        ali_json           : '1.2.28',
+        jackson        : '2.9.0.pr3',
+        ali_json       : '1.2.28',
 
         //util
-        guava              : '21.0',
-        swagger            : '2.6.1',
-        lombok             : '1.16.4',
-        retrofit2          : "2.3.0",
+        guava          : '21.0',
+        swagger        : '2.6.1',
+        lombok         : '1.16.4',
+        retrofit2      : "2.3.0",
+
+        //test
+        junit          : '4.12'
 ]
 
 ext.libraries = [
 
-        "spring-boot-plugin"     : "org.springframework.boot:spring-boot-gradle-plugin:${versions.springboot}",
-        "spring-boot-web"        : "org.springframework.boot:spring-boot-starter-web:${versions.springboot}",
-        "spring-boot-jdbc"       : "org.springframework.boot:spring-boot-starter-jdbc:${versions.springboot}",
-        "spring-boot-mail"       : "org.springframework.boot:spring-boot-starter-mail:${versions.springboot}",
-        "spring-boot-test"       : "org.springframework.boot:spring-boot-starter-test:${versions.springboot}",
+        "spring-boot-plugin"    : "org.springframework.boot:spring-boot-gradle-plugin:${versions.springboot}",
+        "spring-boot-web"       : "org.springframework.boot:spring-boot-starter-web:${versions.springboot}",
+        "spring-boot-jdbc"      : "org.springframework.boot:spring-boot-starter-jdbc:${versions.springboot}",
+        "spring-boot-mail"      : "org.springframework.boot:spring-boot-starter-mail:${versions.springboot}",
+        "spring-boot-test"      : "org.springframework.boot:spring-boot-starter-test:${versions.springboot}",
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-redis
         "spring-boot-redis"      : "org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE",
 
@@ -58,15 +61,17 @@ ext.libraries = [
 
         //swagger  文档api生成工具
         "swagger"                : "io.springfox:springfox-swagger2:${versions.swagger}",
-        "swagger-ui"             : "io.springfox:springfox-swagger-ui:${versions.swagger}",
+        "swagger-ui"            : "io.springfox:springfox-swagger-ui:${versions.swagger}",
 
         //database
-        "mysql-connector"        : "mysql:mysql-connector-java:${versions.mysql_connector}",
-        "ali-druid"              : "com.alibaba:druid:${versions.ali_druid}",
-        "mybatis"                : "org.mybatis:mybatis:${versions.mybatis}",
-        "mybatis-spring"         : "org.mybatis:mybatis-spring:${versions.mybatis_spring}",
+        "mysql-connector"       : "mysql:mysql-connector-java:${versions.mysql_connector}",
+        "ali-druid"             : "com.alibaba:druid:${versions.ali_druid}",
+        "mybatis"               : "org.mybatis:mybatis:${versions.mybatis}",
+        "mybatis-spring"        : "org.mybatis:mybatis-spring:${versions.mybatis_spring}",
 
         //retrofit+okhttp
         "retrofit2"              : "com.squareup.retrofit2:retrofit:${versions.retrofit2}",
         "retrofit2-convert-jackson" : "com.squareup.retrofit2:converter-jackson:${versions.retrofit2}",
+
+        "junit"                 : "junit:junit:${versions.junit}"
 ]

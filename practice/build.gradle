@@ -29,7 +29,9 @@ buildscript {
 
 dependencies {
     testCompile(
-            libraries.'spring-boot-test'
+            libraries.'spring-boot-test',
+            libraries.'lombok',
+            libraries.'junit'
     )
     compile(
             libraries.'spring-boot-web',

@@ -32,6 +32,7 @@ buildscript {
 
 dependencies {
     testCompile(
+            libraries.'lombok',
             libraries.'spring-boot-test'
     )
 

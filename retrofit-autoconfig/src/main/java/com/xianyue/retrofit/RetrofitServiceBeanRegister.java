@@ -1,10 +1,8 @@
 package com.xianyue.retrofit;
 
-import static com.xianyue.retrofit.RetrofitServiceCreateProcessor.BEAN_NAME;
-
 import com.google.common.collect.Sets;
-import java.util.Set;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -15,11 +13,16 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.Set;
+
+import static com.xianyue.retrofit.RetrofitServiceCreateProcessor.BEAN_NAME;
+
 /**
  * 注册postprocessor， 并获取定义的可扫描路径(通过componentScan)
  */
-@Slf4j
 public class RetrofitServiceBeanRegister implements ImportBeanDefinitionRegistrar {
+
+    private static final Logger log = LoggerFactory.getLogger(RetrofitServiceBeanRegister.class);
 
   @Override
   public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,

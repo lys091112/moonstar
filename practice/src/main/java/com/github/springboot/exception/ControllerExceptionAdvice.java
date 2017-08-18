@@ -15,12 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 public class ControllerExceptionAdvice {
 
   @ExceptionHandler(Exception.class)
-  @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-  public Object defaultException(HttpServletRequest request, Exception e) throws Exception {
-    System.out.println("---------------------------------->exception---------------");
-    log.error("catch an error! Host:{}, Url:{}, Error: {}", request.getRemoteHost(),
+  @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+  public ExceptionResponse defaultException(HttpServletRequest request, Exception e) {
+      log.error("Fetch an error! Host:{}, Url:{}, Excepte: {}", request.getRemoteHost(),
         request.getRequestURI(), e);
-    return e.getMessage();
+      return new ExceptionResponse(ExceptionCode.DEFAULT.getCode(), "", e.getMessage());
   }
+
+    @ExceptionHandler(TestException.class)
+    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+    public ExceptionResponse ownException(HttpServletRequest request, Exception e) {
+        log.error("own exception! Host:{}, Url:{}, Excepte: {}", request.getRemoteHost(),
+                request.getRequestURI(), e);
+        TestException ex = (TestException) e;
+        return new ExceptionResponse(ex.getExceptionCode().getCode(), ex.getTraceId(), e.getMessage());
+    }
 
 }

@@ -1,18 +1,18 @@
 package com.github.springboot.domain;
 
 import com.github.springboot.util.PageInfo;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
 /**
  * @author Xianyue
  */
 @Alias("User")
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 public class User extends PageInfo{
     private int    userId;
     private String userName;

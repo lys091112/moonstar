@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @ConditionalOnProperty(value = "practice.test.open", havingValue = "true" )
 @Import(MyServiceBeanRegister.class)
-//@ComponentScan("com.github")
+@ComponentScan("com.github")
 public class CommonTestAutoConfig {
 
   private static final String test = "autoconfig";

@@ -3,15 +3,13 @@ package com.github.springboot.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.springboot.config.UserDemo;
 import com.github.springboot.domain.User;
+import com.github.springboot.exception.TestException;
 import com.github.springboot.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import java.io.IOException;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Xianyue
@@ -77,6 +79,7 @@ public class UserController {
 
     @RequestMapping(value = "/changeUserInfo", method = RequestMethod.GET)
     public UserDemo changeUserInfo() {
+        userDemo.setId(222);
         return userDemo;
     }
 
@@ -113,7 +116,12 @@ public class UserController {
     }
 
     @GetMapping("/exception")
-    public String excpetionTest() throws Exception{
-      throw  new Exception("oh , my lady");
+    public String excpetionTest() {
+        throw new RuntimeException("this is a demo exception");
+    }
+
+    @GetMapping("/ownexception")
+    public String ownExcpetionTest() {
+        throw new TestException("my own exception");
     }
 }
