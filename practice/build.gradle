@@ -37,6 +37,7 @@ dependencies {
             libraries.'spring-boot-web',
             libraries.'spring-boot-jdbc',
             libraries.'spring-boot-redis',
+            libraries.'spring-boot-aop',
             libraries.'lombok',
             libraries.'redis',
             libraries.'swagger',

@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class ControllerExceptionAdvice {
 
-  @ExceptionHandler(Exception.class)
+  @ExceptionHandler(Throwable.class)
   @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
   public ExceptionResponse defaultException(HttpServletRequest request, Exception e) {
-      log.error("Fetch an error! Host:{}, Url:{}, Excepte: {}", request.getRemoteHost(),
+      log.error("Fetch an error! Host:{}, Url:{}, Except:{}", request.getRemoteHost(),
         request.getRequestURI(), e);
       return new ExceptionResponse(ExceptionCode.DEFAULT.getCode(), "", e.getMessage());
   }
@@ -31,4 +31,12 @@ public class ControllerExceptionAdvice {
         return new ExceptionResponse(ex.getExceptionCode().getCode(), ex.getTraceId(), e.getMessage());
     }
 
+  @ExceptionHandler(PrivilegeCheckException.class)
+  @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+  public ExceptionResponse privilegeCheckException(HttpServletRequest request, Exception e) {
+    log.error("own exception! Host:{}, Url:{}, Excepte: {}", request.getRemoteHost(),
+        request.getRequestURI(), e);
+    PrivilegeCheckException ex = (PrivilegeCheckException) e;
+    return new ExceptionResponse(ex.getExceptionCode().getCode(), ex.getTraceId(), e.getMessage());
+  }
 }

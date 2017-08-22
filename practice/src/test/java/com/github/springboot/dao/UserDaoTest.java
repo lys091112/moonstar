@@ -1,6 +1,9 @@
 package com.github.springboot.dao;
 
-import com.github.springboot.Application;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import com.github.springboot.PracticeApplication;
 import com.github.springboot.domain.User;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -12,16 +15,13 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 /**
  *
  * @Transactional 这个注解表示使用事务
  * @Rollback() 这个表示方法执行完以后回滚事务，如果设置为false，则不回滚
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = PracticeApplication.class)
 public class UserDaoTest {
 
     @Autowired

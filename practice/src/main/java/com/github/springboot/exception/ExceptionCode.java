@@ -3,20 +3,24 @@ package com.github.springboot.exception;
 import lombok.Getter;
 
 /**
- * �����쳣���͵��쳣��
  */
 @Getter
 public enum ExceptionCode {
 
     /**
-     * ���Զ����쳣
+     * 默认异常
      */
-    DEFAULT(10002, "Ĭ���쳣"),
+    DEFAULT(10002, "默认异常"),
 
     /**
-     * ģ���쳣ʱʹ�õ��Զ����쳣
+     * 用于自定义测试异常
      */
-    TEST(10001, "�Զ�������쳣");
+    TEST(10001, "自定义测试异常"),
+
+    /**
+     *  权限检测异常
+     */
+    Privilege(10002, "权限不足");
 
     private int code;
 

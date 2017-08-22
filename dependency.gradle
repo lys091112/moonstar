@@ -34,6 +34,7 @@ ext.libraries = [
         "spring-boot-test"      : "org.springframework.boot:spring-boot-starter-test:${versions.springboot}",
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-redis
         "spring-boot-redis"      : "org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE",
+        "spring-boot-aop"      : "org.springframework.boot:spring-boot-starter-aop:${versions.springboot}",
 
         // 忽略common log，使用slf4j代替
         "logback-classic"        : "ch.qos.logback:logback-classic:${versions.logback}",
