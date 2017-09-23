@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.github.springboot.PracticeApplication;
 import com.github.springboot.entity.User;
+import com.github.springboot.mapper.UserMapper;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDaoTest {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
 
     @Before
@@ -37,8 +38,8 @@ public class UserDaoTest {
     @Rollback()
     public void test_addUser() {
         User user = new User(1, "user1", "111");
-        userDao.addUser(user);
-        User user1 = userDao.query(user.getUserId());
+        userMapper.addUser(user);
+        User user1 = userMapper.query(user.getUserId());
         System.out.println(user1.getUserName());
         System.out.println(user1.getPassword());
         assertTrue(user.equals(user1));
@@ -51,14 +52,14 @@ public class UserDaoTest {
     @Rollback()
     public void test_updateUser() {
         User user = new User(0, "user1", "111");
-        userDao.addUser(user);
+        userMapper.addUser(user);
 
-        User user1 = userDao.query(user.getUserId());
+        User user1 = userMapper.query(user.getUserId());
         assertThat(user1.getUserName(), Matchers.equalTo("user1"));
 
         user1.setUserName("newUser");
-        userDao.updateUser(user1);
-        User user2 = userDao.query(user.getUserId());
+        userMapper.updateUser(user1);
+        User user2 = userMapper.query(user.getUserId());
         System.out.println(user1.getUserName());
         assertThat(user2.getUserName(), Matchers.equalTo("newUser"));
     }

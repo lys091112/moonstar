@@ -6,8 +6,6 @@ import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
-/**
- */
 public interface UserMapper {
 
   //    @Insert("insert into user (username,password) values (#{username},#{password})")

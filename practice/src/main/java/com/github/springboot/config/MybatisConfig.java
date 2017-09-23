@@ -60,5 +60,4 @@ public class MybatisConfig {
         fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(environment.getProperty("mybatis.mapperLocations"))); //指定xml文件位置
         return fb.getObject();
     }
-
 }

@@ -8,8 +8,8 @@ import lombok.experimental.Accessors;
 import org.apache.ibatis.type.Alias;
 
 @Alias("User")
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @Accessors(chain = true)
 public class User extends PageInfo implements Serializable{
     private int    userId;

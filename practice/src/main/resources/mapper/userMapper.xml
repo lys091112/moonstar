@@ -6,26 +6,21 @@
     <!--userid, username, password-->
     <!--</sql>-->
 
-    <resultMap id="User" type="User">
+    <resultMap id="UserMap" type="com.github.springboot.entity.User">
         <id property="userId" column="userid" />
         <result property="userName" column="username"/>
         <result property="password" column="password"/>
     </resultMap>
 
-    <insert id="addUser" useGeneratedKeys="true" keyProperty="userId"
-            parameterType="User">
-        INSERT INTO user (username, password)
-        VALUES(
-        #{userName},
-        #{password}
-        )
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="userId" parameterType="User">
+        INSERT INTO user (username, password) VALUES( #{userName}, #{password} )
     </insert>
 
     <select id="count" resultType="int">
         select count(*) from user
     </select>
 
-    <select id="getUsersByPage" parameterType="User" resultMap="User">
+    <select id="getUsersByPage" parameterType="User" resultMap="UserMap">
         select * from user
     </select>
 </mapper>
