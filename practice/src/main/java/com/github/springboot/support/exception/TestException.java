@@ -1,8 +1,5 @@
-package com.github.springboot.exception;
+package com.github.springboot.support.exception;
 
-/**
- * 自定义测试异常
- */
 public class TestException extends BaseException {
 
     public TestException(String message) {

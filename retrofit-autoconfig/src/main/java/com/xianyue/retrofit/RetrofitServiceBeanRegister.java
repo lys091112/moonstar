@@ -37,8 +37,7 @@ public class RetrofitServiceBeanRegister implements ImportBeanDefinitionRegistra
   }
 
   //用来对执行的包进行扫描，并进行注册
-  private void doRetrofitRegister(BeanDefinitionRegistry registry,
-      AnnotationMetadata importingClassMetadata) {
+  private void doRetrofitRegister(BeanDefinitionRegistry registry, AnnotationMetadata importingClassMetadata) {
     RetrofitServiceComponentProvider provider = RetrofitServiceComponentProvider.getInstance();
 
     Set<String> packagesToScans = getScanPackages(registry, importingClassMetadata);

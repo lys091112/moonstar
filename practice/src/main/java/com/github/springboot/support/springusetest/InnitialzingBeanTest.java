@@ -1,6 +1,6 @@
-package com.github.springboot.test;
+package com.github.springboot.support.springusetest;
 
-import com.github.springboot.test.retrofit.SpecialComponentProvider;
+import com.github.springboot.support.springusetest.retrofit.SpecialComponentProvider;
 import java.util.Set;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;

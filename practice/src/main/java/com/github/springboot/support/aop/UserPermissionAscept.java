@@ -1,6 +1,6 @@
-package com.github.springboot.aop;
+package com.github.springboot.support.aop;
 
-import com.github.springboot.exception.PrivilegeCheckException;
+import com.github.springboot.support.exception.PrivilegeCheckException;
 import com.google.common.collect.ImmutableSet;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +34,6 @@ public class UserPermissionAscept {
   public void annatationPointCut() {
   }
 
-
   @Before("methodPointCut()")
   public void before(JoinPoint point) {
     HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
@@ -46,15 +45,17 @@ public class UserPermissionAscept {
     throw new PrivilegeCheckException("only can use get method");
   }
 
+  /**
+   * 执行Around时，需要将处理的返回值返回，不然会造成服务器处理的结果被丢弃
+   */
   @Around("methodPointCut() && annatationPointCut()")
-  public void checkPermission(ProceedingJoinPoint point) throws Throwable {
-
+  public Object checkPermission(ProceedingJoinPoint point) throws Throwable {
+    log.info("target: {} ", point.getTarget());
     try {
-      point.proceed();
+      return point.proceed();
     } catch (Throwable ex) {
       // do nothing
       throw ex;
     }
-    log.info("target: {} ", point.getTarget());
   }
 }

@@ -1,6 +1,5 @@
-package com.github.springboot.test;
+package com.github.springboot.support.springusetest;
 
-import com.github.springboot.config.UserDemoValue;
 import java.beans.PropertyDescriptor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
@@ -40,9 +39,9 @@ public class MyBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdap
   public Object postProcessAfterInitialization(Object bean, String beanName)
       throws BeansException {
     System.out.println("after beanName " + beanName);
-    if(beanName.equals("userDemoValue")) {
-      System.out.println("-------userdemovalue-------------------------> " + ((UserDemoValue)bean).getUserName());
-    }
+//    if(beanName.equals("userDemoValue")) {
+//      System.out.println("-------userdemovalue-------------------------> " + ((UserDemoValue)bean).getUserName());
+//    }
 //    System.out.println("调用postProcessAfterInitialization方法");
     return bean;
   }

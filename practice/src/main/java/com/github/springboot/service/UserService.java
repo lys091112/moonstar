@@ -1,18 +1,17 @@
 package com.github.springboot.service;
 
-import com.github.springboot.config.UserDemoValue;
-import com.github.springboot.dao.UserDao;
-import com.github.springboot.domain.User;
-import com.github.springboot.test.CommonTestAutoConfig;
+import com.github.springboot.entity.User;
+import com.github.springboot.mapper.UserMapper;
+import com.github.springboot.support.springusetest.CommonTestAutoConfig;
+import java.util.Collections;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
 
 /**
  *
@@ -22,10 +21,8 @@ import java.util.List;
 public class UserService {
     private static Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
-    @Autowired
-    UserDemoValue userDemoValue;
     /**
      * 通过这个实例证明@Value的初始化在PostConstruct之前
      */
@@ -37,12 +34,12 @@ public class UserService {
         User user = new User();
         user.setUserName(userName);
         user.setPassword(password);
-        userDao.addUser(user);
+        userMapper.addUser(user);
         return user;
     }
 
     public int updateUser(User user) {
-        return userDao.updateUser(user);
+        return userMapper.updateUser(user);
     }
 
 
@@ -52,15 +49,19 @@ public class UserService {
      */
     @Transactional
     public int testTransaction(User user) {
-        userDao.addUser(user);
+        userMapper.addUser(user);
         logger.info("test transaction. continue...");
-        userDao.testTransaction(user);
-        return 1;
+        throw new IllegalArgumentException("it's a test");
     }
 
     public List<User> getUsersByPage(int pageIndex) {
         User user = new User();
         user.setPageIndex(pageIndex);
-        return userDao.getUsersByPage(user);
+        return userMapper.getUsersByPage(user);
+    }
+
+    public List<User> cacheTest() {
+        User user = new User().setUserId(1).setUserName("hell0").setPassword("xx");
+        return Collections.singletonList(user);
     }
 }

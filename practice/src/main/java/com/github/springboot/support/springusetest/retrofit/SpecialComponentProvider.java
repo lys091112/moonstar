@@ -1,4 +1,4 @@
-package com.github.springboot.test.retrofit;
+package com.github.springboot.support.springusetest.retrofit;
 
 
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;

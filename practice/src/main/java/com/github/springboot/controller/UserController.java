@@ -2,8 +2,8 @@ package com.github.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.springboot.config.UserDemo;
-import com.github.springboot.domain.User;
-import com.github.springboot.exception.TestException;
+import com.github.springboot.entity.User;
+import com.github.springboot.support.exception.TestException;
 import com.github.springboot.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -72,9 +72,10 @@ public class UserController {
      * 通过Cacheable注解，进行redis缓存
      */
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
-    @Cacheable(value = "foo")
-    public UserDemo getUserInfo(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "password", required = false) String password) {
-        return userDemo;
+    @Cacheable(value = "foo", key = "#userName")
+    public List<User> getUserInfo(@RequestParam(value = "userName", required = false) String userName,
+        @RequestParam(value = "password", required = false) String password) {
+        return userService.cacheTest();
     }
 
     @RequestMapping(value = "/changeUserInfo", method = RequestMethod.GET)

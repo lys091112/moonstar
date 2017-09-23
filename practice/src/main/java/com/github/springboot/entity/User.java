@@ -1,21 +1,17 @@
-package com.github.springboot.domain;
+package com.github.springboot.entity;
 
 import com.github.springboot.util.PageInfo;
-import lombok.AllArgsConstructor;
+import java.io.Serializable;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.apache.ibatis.type.Alias;
 
-/**
- * @author Xianyue
- */
 @Alias("User")
-@Getter
-@Setter
 @NoArgsConstructor
-public class User extends PageInfo{
+@Data
+@Accessors(chain = true)
+public class User extends PageInfo implements Serializable{
     private int    userId;
     private String userName;
     private String password;

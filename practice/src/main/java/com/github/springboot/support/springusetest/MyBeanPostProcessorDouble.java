@@ -1,4 +1,4 @@
-package com.github.springboot.test;
+package com.github.springboot.support.springusetest;
 
 import java.beans.PropertyDescriptor;
 import org.springframework.beans.BeansException;

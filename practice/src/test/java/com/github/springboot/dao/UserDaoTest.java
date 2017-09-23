@@ -4,7 +4,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import com.github.springboot.PracticeApplication;
-import com.github.springboot.domain.User;
+import com.github.springboot.entity.User;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;

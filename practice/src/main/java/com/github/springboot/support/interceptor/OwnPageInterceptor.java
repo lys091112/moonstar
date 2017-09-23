@@ -1,4 +1,4 @@
-package com.github.springboot.interceptor;
+package com.github.springboot.support.interceptor;
 
 import com.github.springboot.util.PageInfo;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
@@ -15,15 +15,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-/**
- * @author Xianyue
- */
 @Intercepts(@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class}))
-//@Intercepts(@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class}))
 public class OwnPageInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        System.out.println("------------------------------> ---------------------");
         StatementHandler handler = (StatementHandler) invocation.getTarget();
         MetaObject metaObject = MetaObject.forObject(handler, SystemMetaObject.DEFAULT_OBJECT_FACTORY,
                 SystemMetaObject.DEFAULT_OBJECT_WRAPPER_FACTORY, new DefaultReflectorFactory());

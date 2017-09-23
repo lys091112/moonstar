@@ -1,4 +1,4 @@
-package com.github.springboot.exception;
+package com.github.springboot.support.exception;
 
 public class PrivilegeCheckException extends BaseException {
 

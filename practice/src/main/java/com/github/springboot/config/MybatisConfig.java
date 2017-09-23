@@ -1,7 +1,7 @@
 package com.github.springboot.config;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.github.springboot.interceptor.OwnPageInterceptor;
+import com.github.springboot.support.interceptor.OwnPageInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

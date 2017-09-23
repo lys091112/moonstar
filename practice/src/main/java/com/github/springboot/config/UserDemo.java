@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 public class UserDemo implements Serializable {
-    //    @Value(value = "${user.id}")
     private int    id;
     private String userName;
     private String password;

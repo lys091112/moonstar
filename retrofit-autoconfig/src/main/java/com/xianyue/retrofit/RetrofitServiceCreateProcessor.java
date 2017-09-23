@@ -12,8 +12,8 @@ import retrofit2.Retrofit;
 /**
  * 用来创建retorfit service
  */
-public class RetrofitServiceCreateProcessor extends
-    InstantiationAwareBeanPostProcessorAdapter implements BeanFactoryAware, PriorityOrdered {
+public class RetrofitServiceCreateProcessor extends InstantiationAwareBeanPostProcessorAdapter implements
+    BeanFactoryAware, PriorityOrdered {
 
   static final String BEAN_NAME = "retrofitServiceCreateProcessor";
 
@@ -26,7 +26,6 @@ public class RetrofitServiceCreateProcessor extends
     this.beanFactory = beanFactory;
   }
 
-  //TODO 返回制定的service
   @Override
   public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName)
       throws BeansException {
