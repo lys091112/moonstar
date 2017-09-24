@@ -31,7 +31,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 @EnableConfigurationProperties(RetrofitProperties.class)
 public class RetrofitAutoConfiguration {
 
-  protected final static long DEFAUL_TTIMEOUT = 5000;
+  final static long DEFAUL_TTIMEOUT = 5000;
 
   private final RetrofitProperties retrofitProperties;
 
@@ -74,7 +74,7 @@ public class RetrofitAutoConfiguration {
   @ConditionalOnBean({Converter.Factory.class, OkHttpClient.class})
   public RetrofitServiceHolder retrofit(List<Factory> factories, OkHttpClient client) {
     Retrofit.Builder builder = new Retrofit.Builder();
-    factories.forEach(factory -> builder.addConverterFactory(factory));
+    factories.forEach(builder::addConverterFactory);
     builder.client(client);
 
     if (CollectionUtils.isEmpty(retrofitProperties.getEndpoints())) {

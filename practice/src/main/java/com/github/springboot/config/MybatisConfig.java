@@ -1,5 +1,6 @@
 package com.github.springboot.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.github.springboot.support.interceptor.OwnPageInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
@@ -41,7 +42,10 @@ public class MybatisConfig {
         prop.put("url", environment.getProperty("jdbc.url"));
         prop.put("username", environment.getProperty("jdbc.username"));
         prop.put("password", environment.getProperty("jdbc.password"));
-        return DruidDataSourceFactory.createDataSource(prop);
+//        prop.put("breakAfterAcquireFailure", true);
+        DruidDataSource dataSource = (DruidDataSource) DruidDataSourceFactory.createDataSource(prop);
+        dataSource.setBreakAfterAcquireFailure(true);
+        return dataSource;
     }
 
     @Bean

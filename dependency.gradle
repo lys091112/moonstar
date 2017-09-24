@@ -18,7 +18,7 @@ ext.versions = [
         //util
         guava          : '21.0',
         swagger        : '2.6.1',
-        lombok         : '1.16.4',
+        lombok         : '1.16.18',
         retrofit2      : "2.3.0",
 
         //test

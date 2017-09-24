@@ -1,5 +1,7 @@
 # 使用记录
 
+[![Build Status](https://travis-ci.org/lys091112/moonstar.svg?branch=master)](https://travis-ci.org/lys091112/moonstar)
+
  ##启动
  运行gradle bootRun可以通过控制台启动sprintboot
 
@@ -17,5 +19,5 @@
 
 - practice             #spring 学习demo练习
 - retrofit-autoconfig  #通过注解自动启动retrofit
-- starlight-service    #数据库操作基础service，自提供数据库连接功能，不用外部引用添加数据库工具依赖， 备选： ali-duird， Hikari
+- starlight-service    #数据库操作基础service，自提供数据库连接功能，不用外部引用添加数据库工具依赖， 备选： ali-duird， Hikaric
 - dv                   #数据处理展示层

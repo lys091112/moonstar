@@ -1,58 +1,30 @@
 group 'com.xianyue'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-
-repositories {
-    mavenCentral()
-}
-
 //指定springboot启动的main入口类
 springBoot {
     mainClass = "com.xianyue.springboot.Application"
 }
 
-buildscript {
-    repositories {
-        mavenLocal() //1.优先查找本地maven库，性能最好
-        maven {//2.其次查找aliyun maven库
-            url 'http://maven.aliyun.com/nexus/content/groups/public/'
-        }
-        mavenCentral()
-        jcenter()
-        dependencies {
-            classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
-        }
-    }
-}
-
 dependencies {
-    testCompile(
-            libraries.'spring-boot-test',
-            libraries.'lombok',
-            libraries.'junit'
-    )
-    compile(
-            libraries.'spring-boot-web',
-            libraries.'spring-boot-jdbc',
-            libraries.'spring-boot-redis',
-            libraries.'spring-boot-aop',
-            libraries.'lombok',
-            libraries.'redis',
-            libraries.'swagger',
-            libraries.'swagger-ui',
-            libraries.'ali-json',
-            libraries.'mysql-connector',
-            libraries.'ali-druid',
-            libraries.'mybatis',
-            libraries.'cglib',
-            libraries.'mybatis-spring',
-            libraries.'commons-io',
-            libraries.'guava',
-            libraries.'slf4j-api'
-    )
+    compile "org.springframework.boot:spring-boot-starter-web:${SpringBoot_Version}"
+    compile "org.springframework.boot:spring-boot-starter-jdbc:${SpringBoot_Version}"
+    compile "org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-aop:${SpringBoot_Version}"
+
+    compile "redis.clients:jedis:${Redis_Version}"
+    compile("io.springfox:springfox-swagger2:${Swagger_Version}") {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    compile "io.springfox:springfox-swagger-ui:${Swagger_Version}"
+
+    compile "com.alibaba:fastjson:${Alibaba_Json_Version}"
+    compile "mysql:mysql-connector-java:${Mysql_Connector_Version}"
+    compile "com.alibaba:druid:${Alibaba_Druid_Version}"
+    compile "org.mybatis:mybatis:${Mybatis_Version}"
+    compile "org.mybatis:mybatis-spring:${Mybatis_Spring_Version}"
+    compile "cglib:cglib:${Cglib_Version}"
+    compile "commons-io:commons-io:${Common_Io_Version}"
 //    compile project(":retrofit-autoconfig")
-//    compile(libraries.'swagger') { exclude group:'com.google.guava', module:'guava' }
 }
 
