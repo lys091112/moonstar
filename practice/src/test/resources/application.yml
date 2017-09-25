@@ -1,0 +1,72 @@
+#active profile
+spring:
+  profiles:
+    active: test
+
+  ## redis cluster
+  redis:
+    enabled: true
+    host: localhost
+    port: 6379
+  cache:
+    cacheNames:
+      - foo
+
+  # 404 以异常形式暴露，并关闭spring url的自动映射，
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+
+  #mail
+  mail:
+    host: smtp.exmail.qq.com
+    username: liuhongjun@oneapm.com
+    password: lhj9127@oneapm
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connecttimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+
+server:
+  port: 50001
+  tomcat:
+      access-log-enabled: true
+      access-log-pattern: common
+      accesslog.directory: /tmp/logs/tps/tps-dv
+  session:
+    cookie:
+      name: JSESSIONID_ALERT
+
+### user info
+user:
+  id: 5
+  userName: xianyue
+  password: yue
+
+
+#jdbc
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+#在xml配置文件中，url中的&符号需要转义成&。比如在tomcat的server.xml中配置数据库连接池时，mysql jdbc url样例如下：
+  url: jdbc:mysql://localhost:13306/testdb?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+  username: root
+  password: 12345678
+mybatis:
+  # 指定domain类的基包，即指定其在*Mapper.xml文件中可以使用简名来代替全类名
+  typeAliasesPackage: com.github.springboot.entity
+  #指定Mapper.xml位置
+  mapperLocations: classpath:mapper/*.xml
+
+
+
+practice:
+  test:
+    open: false

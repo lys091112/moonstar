@@ -44,6 +44,7 @@ public class MybatisConfig {
         prop.put("password", environment.getProperty("jdbc.password"));
 //        prop.put("breakAfterAcquireFailure", true);
         DruidDataSource dataSource = (DruidDataSource) DruidDataSourceFactory.createDataSource(prop);
+        dataSource.setRemoveAbandoned(true);
         dataSource.setBreakAfterAcquireFailure(true);
         return dataSource;
     }
