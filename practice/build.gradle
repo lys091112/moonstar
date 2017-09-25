@@ -2,9 +2,9 @@ group 'com.xianyue'
 version '1.0-SNAPSHOT'
 
 //指定springboot启动的main入口类
-springBoot {
-    mainClass = "com.xianyue.springboot.Application"
-}
+//springBoot {
+//    mainClass = "com.github.springboot.PracticeApplication"
+//}
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${SpringBoot_Version}"

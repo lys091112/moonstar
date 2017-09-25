@@ -16,14 +16,17 @@ buildscript {
     }
 }
 
+
 allprojects { subproj ->
 
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'org.springframework.boot'
+    apply plugin: 'application' // 可以运行、安装应用程序并用非“fat jar”方式创建二进制发布版本。
 
     apply from: "$rootDir/config.gradle"
-//    apply from: "$rootDir/dependency.gradle"
+
+    mainClassName = "com.github.springboot.PracticeApplication"
 
     tasks.withType(JavaCompile) {
         sourceCompatibility = 1.8
