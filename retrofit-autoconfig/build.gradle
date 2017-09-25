@@ -1,6 +1,10 @@
 group 'com.xianyue'
 version '1.0-SNAPSHOT'
 
+bootRepackage {
+    enabled = false
+}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${SpringBoot_Version}"
     compile "mysql:mysql-connector-java:${Mysql_Connector_Version}"
