@@ -1,4 +1,4 @@
-package com.github.springboot.support.exception;
+package com.github.springboot.support.exception.bash;
 
 import lombok.Getter;
 

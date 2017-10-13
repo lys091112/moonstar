@@ -1,5 +1,5 @@
 ext {
-    SpringBoot_Version = '1.5.2.RELEASE'
+    SpringBoot_Version = '1.5.6.RELEASE'
 
     //database
     Mysql_Connector_Version = '6.0.5'

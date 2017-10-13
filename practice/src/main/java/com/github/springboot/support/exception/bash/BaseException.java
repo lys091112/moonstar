@@ -1,11 +1,11 @@
-package com.github.springboot.support.exception;
+package com.github.springboot.support.exception.bash;
 
 import lombok.Getter;
 
 import java.util.UUID;
 
 @Getter
-class BaseException extends RuntimeException {
+public class BaseException extends RuntimeException {
 
     /**
      * uuid of the exception, unique

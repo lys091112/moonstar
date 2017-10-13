@@ -23,3 +23,63 @@
      请求参数无法使用@ApiImplicitParam注解进行描述的时候）
 - @ApiModelProperty：描述一个model的属性
 ```
+
+
+### Spring 参数校验
+使用MethodValidationPostProcessor对数据参数进行校验，依赖org.hibernate:hibernate-validator
+使用方式：
+
+You need add @Validated to your class like this
+```java
+  @RestController
+  @Validated
+  class Controller {
+    // ... 
+  }
+```
+add this bean to your context:
+
+```java
+@Configuration
+public class Demo {
+ @Bean
+ public MethodValidationPostProcessor methodValidationPostProcessor() {
+   return new MethodValidationPostProcessor();
+ }
+    
+}
+```
+
+ handle exception:
+```java
+@ControllerAdvice
+@Component
+public class GlobalExceptionHandler {
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map handle(MethodArgumentNotValidException exception) {
+        return error(exception.getBindingResult().getFieldErrors()
+                .stream()
+                .map(FieldError::getDefaultMessage)
+                .collect(Collectors.toList()));
+    }
+
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map handle(ConstraintViolationException exception) {
+        return error(exception.getConstraintViolations()
+                .stream()
+                .map(ConstraintViolation::getMessage)
+                .collect(Collectors.toList()));
+    }
+
+    private Map error(Object message) {
+        return Collections.singletonMap("error", message);
+    }
+}
+```
+
+常用参数验证注解有： Min，Max， Length, Size... 等等， Validated是对Valid的一个封装

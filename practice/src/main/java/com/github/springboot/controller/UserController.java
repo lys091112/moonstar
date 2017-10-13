@@ -10,8 +10,11 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import javax.validation.Valid;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +51,7 @@ import java.util.List;
 
 @RestController  //Controller + ResponseBody + json转化
 @RequestMapping(value = "api/v1")
+@Validated
 public class UserController {
 
     @Autowired
@@ -90,8 +94,10 @@ public class UserController {
         return userDemo;
     }
 
+
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
-    public User addUser(@RequestParam(value = "username") String userName, @RequestParam(value = "password") String password) {
+    public User addUser(@RequestParam(value = "username") String userName,
+        @RequestParam(value = "password") @Length(min = 10, max = 30) String password) {
         return userService.addUser(userName, password);
     }
 
