@@ -1,0 +1,43 @@
+{
+  "request": {
+    "urlPath": "/users/lys091112",
+    "method": "GET",
+    "queryParameters": {
+    }
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "login": "lys091112",
+      "id": 4456651,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4456651?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/lys091112",
+      "html_url": "https://github.com/lys091112",
+      "followers_url": "https://api.github.com/users/lys091112/followers",
+      "following_url": "https://api.github.com/users/lys091112/following{/other_user}",
+      "gists_url": "https://api.github.com/users/lys091112/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/lys091112/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/lys091112/subscriptions",
+      "organizations_url": "https://api.github.com/users/lys091112/orgs",
+      "repos_url": "https://api.github.com/users/lys091112/repos",
+      "events_url": "https://api.github.com/users/lys091112/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/lys091112/received_events",
+      "type": "User",
+      "site_admin": false,
+      "name": "crescent",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "public_repos": 11,
+      "public_gists": 0,
+      "followers": 3,
+      "following": 0,
+      "created_at": "2013-05-17T11:46:46Z",
+      "updated_at": "2017-11-17T09:27:38Z"
+    }
+  }
+}

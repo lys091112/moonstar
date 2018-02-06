@@ -19,5 +19,4 @@ public class RetrofitServiceHolder {
   public Optional<Retrofit> getRetrofit(String tenant) {
     return Optional.ofNullable(retrofitMap.getOrDefault(tenant, null));
   }
-
 }

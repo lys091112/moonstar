@@ -1,6 +1,9 @@
 package com.xianyue.retrofit;
 
+import static com.xianyue.retrofit.RetrofitServiceCreateProcessor.BEAN_NAME;
+
 import com.google.common.collect.Sets;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,10 +15,6 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
-
-import java.util.Set;
-
-import static com.xianyue.retrofit.RetrofitServiceCreateProcessor.BEAN_NAME;
 
 /**
  * 注册postprocessor， 并获取定义的可扫描路径(通过componentScan)

@@ -1,10 +1,12 @@
-package com.github.springboot.config;
+package com.github.springboot.configuration;
 
 import static java.time.Duration.ofMinutes;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.springboot.support.cache.AppCacheConfigurer;
+import com.github.springboot.support.cache.SyncRedisCacheManager;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,12 +16,13 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -33,35 +36,37 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 @AutoConfigureAfter({CacheAutoConfiguration.class})
 @Configuration
 @EnableConfigurationProperties(CacheProperties.class)
-public class RedisPropertiesConfig {
+public class RedisConfiguration {
 
     private static final int DEFAULT_TIME_OUT_MINS = 50; //默认的超时时间
 
     private final CacheProperties cacheProperties;
 
     @Autowired
-    public RedisPropertiesConfig(CacheProperties cacheProperties) {
+    public RedisConfiguration(CacheProperties cacheProperties) {
         this.cacheProperties = cacheProperties;
     }
 
     @Bean
-    @ConditionalOnClass(CacheManager.class)
+    @ConditionalOnClass(SyncRedisCacheManager.class)
     public CacheManager cacheManager(@Qualifier("ownStringRedisTemplate") RedisTemplate<String, String> redisTemplate) {
-        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
+        SyncRedisCacheManager cacheManager = new SyncRedisCacheManager(redisTemplate);
         cacheManager.setUsePrefix(true);
         cacheManager.setDefaultExpiration(ofMinutes(DEFAULT_TIME_OUT_MINS).getSeconds());
         if (null != cacheProperties) {
             cacheManager.setCacheNames(cacheProperties.getCacheNames());
             Map<String, Long> expires = new HashMap<>();
             expires.put("foo", 300L);
+            expires.put("foo2", 300L);
             cacheManager.setExpires(expires);
         }
         return cacheManager;
     }
 
-    @Bean
+    //如果不制定名称，那么会使用方法名来做为初始化的标识
+    @Bean(name = "ownStringRedisTemplate")
     @Qualifier("ownStringRedisTemplate")
-    public RedisTemplate<String, String> tringRedisTemplate(RedisConnectionFactory factory)
+    public RedisTemplate<String, String> stringRedisTemplate(RedisConnectionFactory factory)
         throws UnknownHostException {
         StringRedisTemplate template = new StringRedisTemplate();
         template.setConnectionFactory(factory);
@@ -71,11 +76,13 @@ public class RedisPropertiesConfig {
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         jackson2JsonRedisSerializer.setObjectMapper(om);
         template.setValueSerializer(jackson2JsonRedisSerializer);
-//        template.setKeySerializer(jackson2JsonRedisSerializer);
-//        template.setHashKeySerializer(jackson2JsonRedisSerializer);
-//        template.setHashValueSerializer(jackson2JsonRedisSerializer);
         template.afterPropertiesSet();
         return template;
     }
 
+    @Bean
+    @ConditionalOnMissingBean(CachingConfigurerSupport.class)
+    public AppCacheConfigurer appCacheConfigurer() {
+        return new AppCacheConfigurer();
+    }
 }

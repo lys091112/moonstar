@@ -1,4 +1,4 @@
-package com.github.springboot.config;
+package com.github.springboot.configuration;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
@@ -31,7 +31,7 @@ import java.util.Properties;
 
 @Configuration
 @MapperScan("com.github.springboot.mapper")
-public class MybatisConfig {
+public class MybatisConfiguration {
     @Autowired
     private Environment environment;
 

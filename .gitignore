@@ -10,6 +10,6 @@
 *.class
 */build/*
 /build/*
-
+cep-service/*
 
 

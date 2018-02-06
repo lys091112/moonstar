@@ -7,8 +7,6 @@ import org.apache.commons.io.IOUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- */
 public class RequestHelper {
     private final static String defaultEncoding = "UTF-8";
 

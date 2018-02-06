@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import javax.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -52,6 +53,7 @@ import java.util.List;
 @RestController  //Controller + ResponseBody + json转化
 @RequestMapping(value = "api/v1")
 @Validated
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -76,9 +78,10 @@ public class UserController {
      * 通过Cacheable注解，进行redis缓存
      */
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
-    @Cacheable(value = "foo", key = "#userName")
+    @Cacheable(value = "foo", key = "#userName", sync = true)
     public List<User> getUserInfo(@RequestParam(value = "userName", required = false) String userName,
         @RequestParam(value = "password", required = false) String password) {
+        log.error("==========================>>>>> come in");
         return userService.cacheTest();
     }
 

@@ -10,7 +10,7 @@ import org.springframework.core.PriorityOrdered;
 import retrofit2.Retrofit;
 
 /**
- * 用来创建retorfit service
+ * 用来创建retrofit service
  */
 public class RetrofitServiceCreateProcessor extends InstantiationAwareBeanPostProcessorAdapter implements
     BeanFactoryAware, PriorityOrdered {

@@ -49,6 +49,7 @@ public class Demo {
     
 }
 ```
+常用参数验证注解有： Min，Max， Length, Size... 等等， Validated是对Valid的一个封装
 
  handle exception:
 ```java
@@ -82,4 +83,3 @@ public class GlobalExceptionHandler {
 }
 ```
 
-常用参数验证注解有： Min，Max， Length, Size... 等等， Validated是对Valid的一个封装

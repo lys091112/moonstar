@@ -4,11 +4,14 @@ import static com.fasterxml.jackson.databind.MapperFeature.ACCEPT_CASE_INSENSITI
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xianyue.retrofit.intercepter.HttpLogger;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -31,7 +34,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 @EnableConfigurationProperties(RetrofitProperties.class)
 public class RetrofitAutoConfiguration {
 
-  final static long DEFAUL_TTIMEOUT = 5000;
+  final static long DEFAULT_TIME_OUT = 5000;
 
   private final RetrofitProperties retrofitProperties;
 
@@ -47,25 +50,38 @@ public class RetrofitAutoConfiguration {
         TimeUnit.MINUTES);
   }
 
-  // TODO{crescent} 添加日志拦截器， 执行时间监控拦截器
+  // TODO{crescent} 执行时间监控拦截器
   @Bean
   public OkHttpClient okHttpClient(ConnectionPool connectionPool) {
-    Long connectionTimout = checkAndGetValue(retrofitProperties.getConnectionTimeout(), "connectonTimeout");
+    Long connectionTimeout = checkAndGetValue(retrofitProperties.getConnectionTimeout(), "connectionTimeout");
     Long readTimeout = checkAndGetValue(retrofitProperties.getReadTimeout(), "readTimeout");
-    Long writeTimeout = checkAndGetValue(retrofitProperties.getWirteTimeout(), "writeTimeout");
+    Long writeTimeout = checkAndGetValue(retrofitProperties.getWriteTimeout(), "writeTimeout");
+    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLogger());
+    loggingInterceptor.setLevel(getLogLevel(retrofitProperties.getLogLevel()));
 
     return new OkHttpClient.Builder().connectTimeout(
-        connectionTimout, TimeUnit.MILLISECONDS)
+        connectionTimeout, TimeUnit.MILLISECONDS)
         .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
         .writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
-        .connectionPool(connectionPool).build();
+        .connectionPool(connectionPool)
+        .addInterceptor(loggingInterceptor).build();
+  }
+
+  private Level getLogLevel(String logLevel) {
+    try {
+      return Level.valueOf(logLevel);
+    } catch (IllegalArgumentException e) {
+      log.error("invalid logLevel in properties files! logLevel:{}", logLevel);
+      return Level.NONE;
+    }
+
   }
 
   private Long checkAndGetValue(Long connectionTimeout, String paramName) {
     if (null == connectionTimeout) {
       log.warn("{} is null in the properties! so use default value {} milliseconds", paramName,
-          DEFAUL_TTIMEOUT);
-      return DEFAUL_TTIMEOUT;
+          DEFAULT_TIME_OUT);
+      return DEFAULT_TIME_OUT;
     }
     return connectionTimeout;
   }
@@ -82,7 +98,7 @@ public class RetrofitAutoConfiguration {
     }
     RetrofitServiceHolder holder = new RetrofitServiceHolder();
     retrofitProperties.getEndpoints().forEach(endPoint ->
-        holder.register(endPoint.getIdetify(), builder.baseUrl(endPoint.getBaseUrl()).build()));
+        holder.register(endPoint.getIdentify(), builder.baseUrl(endPoint.getBaseUrl()).build()));
     return holder;
   }
 

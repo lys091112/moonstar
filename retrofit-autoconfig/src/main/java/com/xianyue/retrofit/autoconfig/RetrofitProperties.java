@@ -6,7 +6,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * retorfit properties
+ * retrofit properties
  */
 @Data
 @ConfigurationProperties(prefix = "retrofit")
@@ -15,7 +15,8 @@ public class RetrofitProperties {
   public List<Endpoint> endpoints = new ArrayList<>();
   private Long connectionTimeout;
   private Long readTimeout;
-  private Long wirteTimeout;
+  private Long writeTimeout;
+  private String logLevel;
 
   private Integer maxIdleConnection = 5;
   private Integer keepAliveDuration = 5;
@@ -23,7 +24,7 @@ public class RetrofitProperties {
   @Data
   public static class Endpoint {
 
-    private String idetify;
+    private String identify;
     private String baseUrl;
   }
 }

@@ -1,0 +1,17 @@
+{
+  "request": {
+    "urlPath": "/alert/infos",
+    "method": "GET",
+    "queryParameters": {
+    }
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "login": "lys091112",
+      "id": 4456651,
+      "created_at": "2013-05-17T11:46:46Z",
+      "updated_at": "2017-11-17T09:27:38Z"
+    }
+  }
+}

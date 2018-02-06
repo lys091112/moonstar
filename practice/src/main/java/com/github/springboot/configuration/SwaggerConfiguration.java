@@ -1,4 +1,4 @@
-package com.github.springboot.config;
+package com.github.springboot.configuration;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @Configurable
-public class SwaggerConfig {
+public class SwaggerConfiguration {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
