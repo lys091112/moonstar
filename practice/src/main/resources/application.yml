@@ -23,7 +23,7 @@ spring:
   mail:
     host: smtp.exmail.qq.com
     username: liuhongjun@oneapm.com
-    password: lhj9127@oneapm
+    password: xxxxx
     properties:
       mail:
         smtp:
