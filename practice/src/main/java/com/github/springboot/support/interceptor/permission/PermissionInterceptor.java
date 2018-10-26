@@ -5,7 +5,7 @@ import com.github.springboot.support.CommonResponse;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -14,8 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * 对其调用的方法做权限校验
  */
-@Slf4j
 public class PermissionInterceptor implements HandlerInterceptor {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(PermissionInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,

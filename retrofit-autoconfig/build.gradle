@@ -1,10 +1,6 @@
 group 'com.xianyue'
 version '1.0-SNAPSHOT'
 
-bootRepackage {
-    enabled = false
-}
-
 //testSourceDirs += file('src/test/mockfiles')
 
 dependencies {

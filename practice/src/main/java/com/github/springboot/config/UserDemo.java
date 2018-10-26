@@ -17,6 +17,9 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 public class UserDemo implements Serializable {
+
+
+    private static final long serialVersionUID = 2396093311392271629L;
     private int    id;
     private String userName;
     private String password;

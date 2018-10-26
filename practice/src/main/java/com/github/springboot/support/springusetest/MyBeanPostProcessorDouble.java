@@ -17,7 +17,7 @@ public class MyBeanPostProcessorDouble extends InstantiationAwareBeanPostProcess
 
   // 接口方法、实例化Bean之前调用
   @Override
-  public Object postProcessBeforeInstantiation(Class beanClass, String beanName)
+  public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName)
       throws BeansException {
     System.out.println("---> New before beanName " + beanName);
 //    System.out.println("调用postProcessBeforeInstantiation方法");

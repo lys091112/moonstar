@@ -5,7 +5,7 @@ spring:
 
   ## redis cluster
   redis:
-    enabled: true
+    enabled: false
     host: localhost
     port: 6379
   cache:
@@ -38,6 +38,11 @@ spring:
 
 server:
   port: 50001
+  ssl:
+      key-store: classpath:keystore.p12
+      key-store-password: lys091112
+      keyStoreType: PKCS12
+      keyAlias: tomcat
   tomcat:
       access-log-enabled: true
       access-log-pattern: common
@@ -57,7 +62,7 @@ user:
 jdbc:
   driverClassName: com.mysql.jdbc.Driver
 #在xml配置文件中，url中的&符号需要转义成&。比如在tomcat的server.xml中配置数据库连接池时，mysql jdbc url样例如下：
-  url: jdbc:mysql://localhost:13306/testdb?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+  url: jdbc:mysql://localhost:13306/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
   username: root
   password: 12345678
 mybatis:
