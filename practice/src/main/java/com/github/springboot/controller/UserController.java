@@ -1,16 +1,18 @@
 package com.github.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.github.springboot.config.UserDemo;
+import com.github.springboot.common.config.UserDemo;
 import com.github.springboot.entity.User;
-import com.github.springboot.support.exception.TestException;
 import com.github.springboot.service.UserService;
+import com.github.springboot.support.exception.TestException;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import javax.validation.Valid;
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Xianyue
@@ -56,13 +54,17 @@ import java.util.List;
 @Slf4j
 public class UserController {
 
-    @Autowired
-    UserDemo userDemo;
+    private final UserDemo userDemo;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     private final static String prefix = "PREFIX";
+
+    @Autowired
+    public UserController(UserDemo userDemo, UserService userService) {
+        this.userDemo = userDemo;
+        this.userService = userService;
+    }
 
     @ApiOperation("获取用户信息")
     @ApiImplicitParams({

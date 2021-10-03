@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.moonstar.mapper.UserMapper">
+
+  <resultMap id="UserMap" type="com.github.moonstar.entity.UserEntity">
+    <id property="userId" column="userid"/>
+    <result property="userName" column="username"/>
+    <result property="password" column="password"/>
+  </resultMap>
+
+  <insert id="addUser" useGeneratedKeys="true" keyProperty="userId" parameterType="UserEntity">
+        INSERT INTO user (username, password) VALUES( #{userName}, #{password} )
+    </insert>
+</mapper>

@@ -1,4 +1,6 @@
 rootProject.name = 'moonstar'
 include 'practice'
 include 'retrofit-autoconfig'
+include 'service'
+findProject(':service')?.name = 'moonstart.service'
 

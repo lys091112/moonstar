@@ -1,22 +1,23 @@
-package com.github.springboot.entity;
+package com.github.moonstar.entity;
 
-import com.github.springboot.support.util.PageInfo;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.apache.ibatis.type.Alias;
 
-@Alias("User")
+@Alias("UserEntity")
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class User extends PageInfo implements Serializable{
-    private int    userId;
+public class UserEntity implements Serializable {
+
+    private static final long serialVersionUID = 3748548454201468378L;
+    private long userId;
     private String userName;
     private String password;
 
-    public User(int userId, String userName, String password) {
+    public UserEntity(long userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;

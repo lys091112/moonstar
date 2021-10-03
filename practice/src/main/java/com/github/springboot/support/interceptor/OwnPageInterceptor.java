@@ -1,6 +1,6 @@
 package com.github.springboot.support.interceptor;
 
-import com.github.springboot.util.PageInfo;
+import com.github.springboot.support.util.PageInfo;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;

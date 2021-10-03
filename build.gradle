@@ -91,10 +91,6 @@ allprojects { subproj ->
 }
 
 subprojects { subproj ->
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'application' // 可以运行、安装应用程序并用非“fat jar”方式创建二进制发布版本。
-    mainClassName = "com.github.springboot.PracticeApplication"
-
     task createJavaProject << {
         sourceSets*.java.srcDirs*.each { it.mkdirs() }
         sourceSets*.resources.srcDirs*.each { it.mkdirs() }
@@ -113,5 +109,6 @@ subprojects { subproj ->
         compile "org.projectlombok:lombok:${Lombok_Version}"
         compile "com.google.guava:guava:${Guava_Version}"
         compile "org.slf4j:slf4j-api:${Slf4j_Version}"
+        compile "com.alibaba:fastjson:${Alibaba_Json_Version}"
     }
 }

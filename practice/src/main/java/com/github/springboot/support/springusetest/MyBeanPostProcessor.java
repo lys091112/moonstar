@@ -21,12 +21,23 @@ public class MyBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdap
    * @see InstantiationAwareBeanPostProcessorAdapter
    **/
 
-  @Override
   public Object postProcessBeforeInstantiation(Class beanClass, String beanName)
       throws BeansException {
-    System.out.println("before beanName " + beanName);
+    System.out.println("postProcessBeforeInstantiation: before beanName " + beanName);
 //    System.out.println("调用postProcessBeforeInstantiation方法");
     return null;
+  }
+
+  @Override
+  public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+    System.out.println("postProcessAfterInstantiation: after beanName " + beanName);
+    return super.postProcessAfterInstantiation(bean, beanName);
+  }
+
+  @Override
+  public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    System.out.println("postProcessBeforeInitialization: before beanName " + beanName);
+    return super.postProcessBeforeInitialization(bean, beanName);
   }
 
   /**
@@ -38,7 +49,7 @@ public class MyBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdap
   @Override
   public Object postProcessAfterInitialization(Object bean, String beanName)
       throws BeansException {
-    System.out.println("after beanName " + beanName);
+    System.out.println("postProcessAfterInitialization: after beanName " + beanName);
 //    if(beanName.equals("userDemoValue")) {
 //      System.out.println("-------userdemovalue-------------------------> " + ((UserDemoValue)bean).getUserName());
 //    }

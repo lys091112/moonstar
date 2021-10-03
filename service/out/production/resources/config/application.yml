@@ -1,0 +1,33 @@
+#active profile
+spring:
+  profiles:
+    active: dev
+
+  # 404 以异常形式暴露，并关闭spring url的自动映射，
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+
+server:
+  port: 50001
+  tomcat:
+      access-log-enabled: true
+      access-log-pattern: common
+      accesslog.directory: /tmp/logs/tps/tps-dv
+
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID_ALERT
+
+
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:13306/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+  username: root
+  password: 12345678
+mybatis:
+  typeAliasesPackage: com.github.moonstar.entity
+  mapperLocations: classpath:mapper/*.xml
+

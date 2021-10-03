@@ -8,7 +8,12 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+//@Component
 public class AwareBean implements ApplicationContextAware, BeanNameAware, BeanFactoryAware {
+
+  public AwareBean() {
+    System.out.println("test");
+  }
 
   @Override
   public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
