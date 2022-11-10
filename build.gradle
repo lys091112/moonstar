@@ -1,4 +1,4 @@
-group 'com.github'
+group 'crescent'
 version '1.0-SNAPSHOT'
 
 // 不能放在allprojects 模块内，会造成plugin with id spring-boot not found in parent build.gradle
@@ -109,6 +109,8 @@ subprojects { subproj ->
         compile "org.projectlombok:lombok:${Lombok_Version}"
         compile "com.google.guava:guava:${Guava_Version}"
         compile "org.slf4j:slf4j-api:${Slf4j_Version}"
-        compile "com.alibaba:fastjson:${Alibaba_Json_Version}"
+        implementation "com.fasterxml.jackson.core:jackson-databind:${Jackson_Version}"
+        implementation "com.fasterxml.jackson.core:jackson-core:${Jackson_Version}"
+        implementation "com.fasterxml.jackson.core:jackson-annotation:${Jackson_Version}"
     }
 }

@@ -1,6 +1,6 @@
 package com.github.moonstar.configuration;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -16,13 +16,10 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 public class MybatisConfiguration {
 
     @Bean
-    @Qualifier(value = "druid")
+    @Qualifier(value = "hikari")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource getDataSource() throws Exception {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setBreakAfterAcquireFailure(true);
-        dataSource.setRemoveAbandoned(true);
-        return dataSource;
+        return new HikariDataSource();
     }
 
     @Bean
