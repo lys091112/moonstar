@@ -1,38 +1,56 @@
-group 'crescent'
-version '1.0.0-SNAPSHOT'
-apply plugin: 'org.springframework.boot'
-
+plugins {
+    id "org.springframework.boot" version "3.0.0"
+    id "io.spring.dependency-management" version "1.1.0"
+}
 
 bootJar {
     manifest {
-        attributes 'Start-Class': 'com.github.moonstar.Application'
+        attributes 'Start-Class': 'io.crescent.moonstar.Application'
     }
 }
-//指定springboot启动的main入口类
-springBoot {
-    mainClassName = "com.github.moonstar.Application"
-}
+// Entry config/application.yml is a duplicate but no duplicate handling strategy has been set. Please refer to https://docs.gradle.org/7.5.1/dsl/org.gradle.api.tasks.Copy.html#org.gradle.api.tasks.Copy:duplicatesStrategy for details.
+//https://stackoverflow.com/questions/67265308/gradle-entry-classpath-is-a-duplicate-but-no-duplicate-handling-strategy-has-b
+tasks.withType(Copy).all { duplicatesStrategy 'exclude' }
 
 sourceSets.main.java.srcDir 'src/main/java'
 sourceSets.main.resources.srcDir 'src/main/resources'
 
+configurations.all {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web:${SpringBoot_Version}"
-    compile("org.springframework.boot:spring-boot-starter-jdbc:${SpringBoot_Version}") {
+    implementation("org.springframework.boot:spring-boot-starter:${SpringBoot_Version}") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+    implementation "org.springframework.boot:spring-boot-starter-web:${SpringBoot_Version}"
+    implementation("org.springframework.boot:spring-boot-starter-jdbc:${SpringBoot_Version}") {
         exclude group: 'org.apache.tomcat', module: 'tomcat-jdbc'
     }
-    compile "org.springframework.boot:spring-boot-starter-aop:${SpringBoot_Version}"
-    compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.12.Final'
-    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
+    implementation "org.springframework.boot:spring-boot-starter-aop:${SpringBoot_Version}"
+    implementation "org.springframework.boot:spring-boot-starter-log4j2:${SpringBoot_Version}"
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${SpringBoot_Version}"
+    implementation "org.springframework.boot:spring-boot-starter-security:${SpringBoot_Version}"
+
+    implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.12.Final'
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
 
 
-    compile "mysql:mysql-connector-java:${Mysql_Connector_Version}"
+    implementation "mysql:mysql-connector-java:${Mysql_Connector_Version}"
 
     // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
     implementation 'com.zaxxer:HikariCP:5.0.1'
 
-    compile "cglib:cglib:${Cglib_Version}"
-    compile "commons-io:commons-io:${Common_Io_Version}"
+    implementation "cglib:cglib:${Cglib_Version}"
+    implementation "commons-io:commons-io:${Common_Io_Version}"
+
+    // https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.10.2'
+    implementation 'io.micrometer:micrometer-core:1.10.2'
+
+
+
 }
 
 

@@ -1,5 +1,7 @@
 package com.github.springboot;
 
+import io.prometheus.client.spring.boot.EnablePrometheusEndpoint;
+import io.prometheus.client.spring.boot.EnableSpringBootMetricsCollector;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -14,6 +16,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 // @SpringBootApplication(scanBasePackages = {"com.github.springboot"})
 //same as @Configuration+@EnableAutoConfiguration+@ComponentScan
 @EnableAspectJAutoProxy
+@EnablePrometheusEndpoint
+@EnableSpringBootMetricsCollector
 public class PracticeApplication {
 
   public static void main(String[] args) {

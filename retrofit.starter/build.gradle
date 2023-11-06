@@ -1,0 +1,13 @@
+//testSourceDirs += file('src/test/mockfiles')
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web:${SpringBoot_Version}"
+    implementation "mysql:mysql-connector-java:${Mysql_Connector_Version}"
+
+
+    api "com.squareup.retrofit2:retrofit:${Retrofit2_Version}"
+    api "com.squareup.retrofit2:converter-jackson:${Retrofit2_Version}"
+    api "com.squareup.okhttp3:logging-interceptor:${OKHttp_Version}"
+
+    testImplementation "com.github.tomakehurst:wiremock:${WireMock_Version}"
+}

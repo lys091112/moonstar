@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.crescent.retrofit.autoconfig.RetrofitAutoConfiguration

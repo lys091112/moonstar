@@ -11,13 +11,13 @@ env:
   - _JAVA_OPTIONS='-Xmx500m'
 
 jdk:
-  oraclejdk8
+  oraclejdk17
 
  
 matrix:
   include:
     - jdk: oraclejdk8 # JDK 1.8.0_131-b11 or newer
-    - jdk: oraclejdk9 # JDK 9+175 or newer
+    - jdk: oraclejdk17 # JDK 17+
  
 # Don't let Travis CI execute './gradlew assemble' by default
 install:

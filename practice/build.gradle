@@ -1,48 +1,56 @@
+plugins {
+    id "org.springframework.boot" version "3.0.0"
+    id "io.spring.dependency-management" version "1.1.0"
+}
+
 group 'com.xianyue'
 version '1.0-SNAPSHOT'
-//apply plugin: 'spring-boot'
-apply plugin: 'org.springframework.boot'
 
 
-bootJar {
-    manifest {
-        attributes 'Start-Class': 'com.example.ExampleApplication'
-        mainClassName = "com.github.springboot.PracticeApplication"
-    }
-}
+//bootJar {
+//    manifest {
+////        attributes 'Start-Class': 'com.example.ExampleApplication'
+//        mainClassName = "com.github.springboot.PracticeApplication"
+//    }
+//}
 //指定springboot启动的main入口类
 springBoot {
-    mainClassName = "com.github.springboot.PracticeApplication"
+    mainClass = "com.github.springboot.PracticeApplication"
 }
 
 sourceSets.main.java.srcDir 'src/main/java'
 sourceSets.main.resources.srcDir 'src/main/resources'
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web:${SpringBoot_Version}"
-    compile("org.springframework.boot:spring-boot-starter-jdbc:${SpringBoot_Version}") {
+    implementation "org.springframework.boot:spring-boot-starter-web:${SpringBoot_Version}"
+    implementation("org.springframework.boot:spring-boot-starter-jdbc:${SpringBoot_Version}") {
         exclude group: 'org.apache.tomcat', module: 'tomcat-jdbc'
     }
-    compile "org.springframework.boot:spring-boot-starter-data-redis:${SpringBoot_Version}"
-    compile "org.springframework.boot:spring-boot-starter-aop:${SpringBoot_Version}"
-    compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.12.Final'
-    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
-    compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.0'
+    implementation "org.springframework.boot:spring-boot-starter-data-redis:${SpringBoot_Version}"
+    implementation "org.springframework.boot:spring-boot-starter-aop:${SpringBoot_Version}"
+    implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.12.Final'
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
+    implementation group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.0'
 
-//    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+//    testImplementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 
 
-
-    compile "redis.clients:jedis:${Redis_Version}"
-    compile("io.springfox:springfox-swagger2:${Swagger_Version}") {
+    implementation "redis.clients:jedis:${Redis_Version}"
+    implementation("io.springfox:springfox-swagger2:${Swagger_Version}") {
         exclude group: 'com.google.guava', module: 'guava'
     }
-    compile "io.springfox:springfox-swagger-ui:${Swagger_Version}"
+    implementation "io.springfox:springfox-swagger-ui:${Swagger_Version}"
 
-    compile "com.alibaba:fastjson:${Alibaba_Json_Version}"
-    compile "mysql:mysql-connector-java:${Mysql_Connector_Version}"
-    compile "com.alibaba:druid:${Alibaba_Druid_Version}"
-    compile "cglib:cglib:${Cglib_Version}"
-    compile "commons-io:commons-io:${Common_Io_Version}"
+    implementation "mysql:mysql-connector-java:${Mysql_Connector_Version}"
+    implementation "com.alibaba:druid:${Alibaba_Druid_Version}"
+    implementation "cglib:cglib:${Cglib_Version}"
+    implementation "commons-io:commons-io:${Common_Io_Version}"
+
+    // https://mvnrepository.com/artifact/io.prometheus/simpleclient_spring_boot
+    implementation 'io.prometheus:simpleclient_spring_boot:0.16.0'
+
+//    implementation "org.springframework.boot:spring-boot-starter-actuator:1.5.22.RELEASE"
+//    implementation "org.springframework.boot:spring-boot-starter-security:1.5.22.RELEASE"
+
 }
 

@@ -1,5 +1,5 @@
 ext {
-    SpringBoot_Version = '2.6.3'
+    SpringBoot_Version = '3.0.0'
 
     //database
     Mysql_Connector_Version = '6.0.5'
@@ -17,7 +17,7 @@ ext {
     //util
     Guava_Version = '21.0'
     Swagger_Version = '2.6.1'
-    Lombok_Version = '1.16.18'
+    Lombok_Version = '1.18.24'
     Retrofit2_Version = "2.3.0"
     OKHttp_Version = '3.9.1'
     Redis_Version = '2.9.0'

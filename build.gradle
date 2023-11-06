@@ -1,40 +1,44 @@
-group 'crescent'
-version '1.0-SNAPSHOT'
-
 // 不能放在allprojects 模块内，会造成plugin with id spring-boot not found in parent build.gradle
-buildscript {
-    repositories {
-        mavenLocal() //1.优先查找本地maven库，性能最好
-        maven {//2.其次查找aliyun maven库
-            url 'http://maven.aliyun.com/nexus/content/groups/public/'
-        }
-        mavenCentral()
-        jcenter()
-        dependencies {
-            classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
-        }
-    }
-}
+//buildscript {
+//    repositories {
+//        mavenLocal() //1.优先查找本地maven库，性能最好
+//        maven {//2.其次查找aliyun maven库
+//            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+//        }
+//        mavenCentral()
+//        jcenter()
+//        dependencies {
+//            classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+//        }
+//    }
+//}
+
+
+group 'io.crescent'
+version '1.0.0-SNAPSHOT'
 
 
 allprojects { subproj ->
 
-    apply plugin: 'java'
+
+    apply plugin: 'test.java-library-conventions'
     apply plugin: 'idea'
     apply from: "$rootDir/config.gradle"
 
-
     tasks.withType(JavaCompile) {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = 17
+        targetCompatibility = 17
         options.encoding = 'UTF-8'
     }
 
     repositories {
-        mavenLocal() //1.优先查找本地maven库，性能最好
-        maven {//2.其次查找aliyun maven库
-            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
         }
+        maven {
+            url 'https://maven.aliyun.com/repository/spring/'
+        }
+        mavenLocal() //2.优先查找本地maven库，性能最好
         mavenCentral()//3.最后查找maven中央库
     }
 
@@ -91,10 +95,11 @@ allprojects { subproj ->
 }
 
 subprojects { subproj ->
-    task createJavaProject << {
-        sourceSets*.java.srcDirs*.each { it.mkdirs() }
-        sourceSets*.resources.srcDirs*.each { it.mkdirs() }
-    }
+//    task createJavaProject << {
+//        sourceSets*.java.srcDirs*.each { it.mkdirs() }
+//        sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+//    }
+
 
     compileTestJava {
         options.encoding = 'UTF-8'
@@ -102,15 +107,17 @@ subprojects { subproj ->
     }
 
     dependencies {
-        testCompile "junit:junit:${Junit_Version}"
-        testCompile "org.projectlombok:lombok:${Lombok_Version}"
-        testCompile "org.springframework.boot:spring-boot-starter-test:${SpringBoot_Version}"
+        testImplementation 'junit:junit:4.12'
+        testImplementation "org.springframework.boot:spring-boot-starter-test:${SpringBoot_Version}"
 
-        compile "org.projectlombok:lombok:${Lombok_Version}"
-        compile "com.google.guava:guava:${Guava_Version}"
-        compile "org.slf4j:slf4j-api:${Slf4j_Version}"
+        implementation "org.projectlombok:lombok:${Lombok_Version}"
+        annotationProcessor "org.projectlombok:lombok:${Lombok_Version}"
+        api "com.google.guava:guava:${Guava_Version}"
         implementation "com.fasterxml.jackson.core:jackson-databind:${Jackson_Version}"
         implementation "com.fasterxml.jackson.core:jackson-core:${Jackson_Version}"
-        implementation "com.fasterxml.jackson.core:jackson-annotation:${Jackson_Version}"
+        implementation "com.fasterxml.jackson.core:jackson-annotations:${Jackson_Version}"
+
+        implementation 'org.apache.commons:commons-lang3:3.12.0'
+
     }
 }

@@ -15,6 +15,9 @@ spring:
     username: root
     password: 12345678
 
+  prometheus:
+    enable: true
+
 server:
   port: 50001
   tomcat:
@@ -27,7 +30,15 @@ server:
       cookie:
         name: JSESSIONID_ALERT
 
-mybatis:
-  typeAliasesPackage: com.github.moonstar.entity
-  mapperLocations: classpath:mapper/*.xml
+#mybatis:
+#  typeAliasesPackage: io.crescent.moonstar.entity
+#  mapperLocations: classpath:mapper/*.xml
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - prometheus
